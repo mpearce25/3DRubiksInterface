@@ -7,9 +7,9 @@ import com.jme3.scene.*;
 
 public class Main extends SimpleApplication {
  
-    
+    Node bottomRow = new Node();
     Quaternion rotation=(new Quaternion()).fromAngles(0,0, 0);
-Quaternion rotationVelocity=(new Quaternion()).fromAngles(0.25f,0.5f, 0.25f);
+Quaternion rotationVelocity=(new Quaternion()).fromAngles(1.0f,0.0f, 0f);
 
 Spatial cube9;
     public static void main(String[] args){
@@ -27,6 +27,7 @@ Spatial cube9;
         Node pivot = new Node("pivot");
         pivot.rotate(2f,2f,2f);
         rootNode.attachChild(pivot); // put this node in the scene
+        
         flyCam.setMoveSpeed(10);
   
         Spatial cube1 = createSpatial("Models/C-rwb/C-rwb.j3o", new Vector3f(0,0,0), 180,90,0);
@@ -41,11 +42,17 @@ Spatial cube9;
         Spatial cube7 = createSpatial("Models/C-ryb/C-ryb.j3o", new Vector3f(0,-4,0), 180,0,0);
         rootNode.attachChild(cube7);
         
+        
+        rootNode.attachChild(bottomRow);
         Spatial cube8 = createSpatial("Models/E-ry/E-ry.j3o", new Vector3f(-2,-4,0), 0,270,180);
-        rootNode.attachChild(cube8);
+        //rootNode.attachChild(cube8);
+        bottomRow.attachChild(cube8);
         
         cube9 = createSpatial("Models/C-ryg/C-ryg.j3o", new Vector3f(-4,-4,0), 180,270,0);
-        rootNode.attachChild(cube9);
+        //rootNode.attachChild(cube9);
+        bottomRow.attachChild(cube9);
+        
+       // rootNode.attachChild();
      
         
     }
@@ -73,8 +80,7 @@ public void simpleUpdate(float tpf) {
     rotationVelocityFPS.slerp(Quaternion.IDENTITY, rotationVelocity, tpf);
 
     rotation.multLocal(rotationVelocityFPS);
-
-    cube9.setLocalRotation(rotation);
+    bottomRow.setLocalRotation(rotation);
 }
     
     public Spatial createSpatial(String modelPath, Vector3f translation, float rotX, float rotY, float rotZ ){
