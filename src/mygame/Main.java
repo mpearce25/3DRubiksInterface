@@ -8,8 +8,9 @@ import com.jme3.scene.*;
 public class Main extends SimpleApplication {
  
     Node bottomRow = new Node();
-    Quaternion rotation=(new Quaternion()).fromAngles(0,0, 0);
-Quaternion rotationVelocity=(new Quaternion()).fromAngles(1.0f,0.0f, 0f);
+    //Quaternion rotation=(new Quaternion()).fromAngles(145 ,78, 19);
+    Quaternion rotation=(new Quaternion()).fromAngles(0, 0, 0);
+Quaternion rotationVelocity=(new Quaternion()).fromAngles(0.0f,1.0f, 0.0f);
 
 Spatial cube9;
     public static void main(String[] args){
@@ -40,7 +41,7 @@ Spatial cube9;
         rootNode.attachChild(cube3);
         
         Spatial cube7 = createSpatial("Models/C-ryb/C-ryb.j3o", new Vector3f(0,-4,0), 180,0,0);
-        rootNode.attachChild(cube7);
+        bottomRow.attachChild(cube7);
         
         
         rootNode.attachChild(bottomRow);
