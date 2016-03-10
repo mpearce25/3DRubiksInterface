@@ -119,17 +119,21 @@ Spatial cube9;
     float degree = FastMath.PI / 2;
     public void rotateD(float tpf){
    
+       //for (int i = 0; i < 10; i ++){
         Quaternion rotation=( new Quaternion()).fromAngleAxis(degree , new Vector3f(0,1,0));
+        
         degree += FastMath.PI /2;
         if (degree > FastMath.PI * 2){
             degree = 0;
         }
+        bottomRow.setLocalRotation(rotation);
+        //}
       //  Quaternion rotationVelocityFPS=new Quaternion();
     //rotationVelocityFPS.slerp(Quaternion.IDENTITY, rotationVelocity, tpf);
 
     //rotation.multLocal(rotationVelocityFPS);
     
-    bottomRow.setLocalRotation(rotation);
+    
     //delay(2000);
     }
     
