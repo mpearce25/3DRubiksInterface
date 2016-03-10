@@ -22,7 +22,7 @@ public class Main extends SimpleApplication {
         Node pivot = new Node("pivot");
         pivot.rotate(2f,2f,2f);
         rootNode.attachChild(pivot); // put this node in the scene
-        flyCam.setMoveSpeed(5);
+        flyCam.setMoveSpeed(10);
   
         Spatial cube1 = createSpatial("Models/C-rwb/C-rwb.j3o", new Vector3f(0,0,0), 180,90,0);
         rootNode.attachChild(cube1);
