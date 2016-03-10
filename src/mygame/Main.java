@@ -31,7 +31,7 @@ public class Main extends SimpleApplication {
     //Quaternion rotation=(new Quaternion()).fromAngles(145 ,78, 19);
     //Quaternion rotation=(new Quaternion()).fromAngles(0, 0,0);
     Quaternion rotation=( new Quaternion()).fromAngleAxis(FastMath.PI/2, new Vector3f(1,0,0));
-//Quaternion rotationVelocity=(new Quaternion()).fromAngles(0.0f,0.0f, 0f);
+Quaternion rotationVelocity=(new Quaternion()).fromAngles(0.1f,.1f, .1f);
 
 Spatial cube9;
     public static void main(String[] args){
@@ -126,12 +126,16 @@ Spatial cube9;
         if (degree > FastMath.PI * 2){
             degree = 0;
         }
+       // Quaternion rotationVelocity=(new Quaternion()).fromAngles(0.0f,0.0f, 0f);
+        
+        Quaternion rotationVelocityFPS=new Quaternion();
+        rotationVelocityFPS.slerp(Quaternion.IDENTITY, rotationVelocity, tpf);
+
+        rotation.multLocal(rotationVelocityFPS);
+        
         bottomRow.setLocalRotation(rotation);
         //}
-      //  Quaternion rotationVelocityFPS=new Quaternion();
-    //rotationVelocityFPS.slerp(Quaternion.IDENTITY, rotationVelocity, tpf);
-
-    //rotation.multLocal(rotationVelocityFPS);
+      //  
     
     
     //delay(2000);
