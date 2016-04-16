@@ -13,13 +13,13 @@ import java.util.ArrayList;
 
 public class Main extends SimpleApplication {
  
-    
+     ArrayList<Spatial> allCubes = new ArrayList<Spatial>();
     private ActionListener actionListener = new ActionListener(){
         public void onAction(String name, boolean pressed, float tpf){
             System.out.println(name + " = " + pressed);
             
             if (pressed){
-                rotateD(tpf);
+                rotateD(tpf, allCubes);
             }
         }
     };
@@ -55,7 +55,7 @@ Spatial cube9;
         
         flyCam.setMoveSpeed(10);
         
-        ArrayList<Spatial> allCubes = new ArrayList<Spatial>();
+       
   
         Spatial cube1 = createSpatial(rootNode, "Models/C-rwb/C-rwb.j3o", new Vector3f(0,0,0), 180,90,0);
         //rootNode.attachChild(cube1);
@@ -213,11 +213,30 @@ Spatial cube9;
         rootNode.addLight(sun);     
     }
     
+    Boolean added = false;
     float degree = FastMath.PI / 2;
-    public void rotateD(float tpf){
+    public void rotateD(float tpf, ArrayList<Spatial> allCubes){
    
        //for (int i = 0; i < 10; i ++){
-        Quaternion rotation=( new Quaternion()).fromAngleAxis(degree , new Vector3f(0,1,0));
+        Node testRotate = new Node();
+        
+        for (int i = 0; i < 8; i++){
+            
+            if (!added){
+                rootNode.detachChildAt(i);
+                added = !added;
+            }
+            
+            allCubes.get(i).setLocalTranslation(new Vector3f(-2,0,0));
+            testRotate.attachChild(allCubes.get(i));
+            
+        }
+        
+        rootNode.attachChild(testRotate);
+        
+       
+        
+        Quaternion rotation=( new Quaternion()).fromAngleAxis(degree , new Vector3f(0,0,1));
         
         degree += FastMath.PI /2;
         if (degree > FastMath.PI * 2){
@@ -230,7 +249,7 @@ Spatial cube9;
 
         rotation.multLocal(rotationVelocityFPS);
         
-        bottomRow.setLocalRotation(rotation);
+        testRotate.setLocalRotation(rotation);
         //}
       //  
     
